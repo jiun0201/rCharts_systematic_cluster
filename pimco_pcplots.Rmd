@@ -14,7 +14,7 @@ assets:
   
 <style>
 iframe{
-  height:600px;
+  height:450px;
   width:900px;
   margin:auto auto;
 }
@@ -48,10 +48,28 @@ I have already written it, but I feel the need to once again compliment [Systema
 
 ```{r echo = F, message = F, warning = F, error = F, cache = F}
 require(knitr)
+require(rCharts)
 opts_chunk$set(results='asis', message = F, warning = F, error = T, cache = F, tidy = F)
 data <- new.env()
 #reduce calls to Yahoo! Finance by saving the data
 load("pimco_data.Rdata",envir=data)
+setInternet2(TRUE)
+con = gzcon(url('http://www.systematicportfolio.com/sit.gz', 'rb'))
+source(con)
+close(con)
+#*****************************************************************
+# Load historical data for Pimco Funds
+#****************************************************************** 
+library(quantmod)
+tickers = c("PISIX","PSKIX","PSDIX","PSTKX","PCRIX",
+            "PFIIX","PHMIX","PFCIX","PCDIX","PTSHX",
+            "PFMIX","PLMIX","PSPTX","PCIMX","PSTIX",
+            "PNYIX","PLDTX","PLDIX","PTLDX","PAAIX",
+            "PXTIX","PHIYX","PSCSX","PAUIX","PTRIX",
+            "PGBIX","PFORX","PELBX","PDMIX","PMDRX",
+            "PEBIX","PDIIX","PRRSX","PMBIX","PTSAX",
+            "PTTRX","PIGLX","PRRIX","PFUIX","PIMIX",
+            "PIGIX","PRAIX","PLRIX","PGOVX","PEDIX","VFINX")
 ```
 
 ### Gather Data as Usual

@@ -14,7 +14,7 @@ assets:
   
 <style>
 iframe{
-  height:600px;
+  height:450px;
   width:900px;
   margin:auto auto;
 }
