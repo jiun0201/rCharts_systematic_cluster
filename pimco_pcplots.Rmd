@@ -48,7 +48,7 @@ I have already written it, but I feel the need to once again compliment [Systema
 
 ```{r echo = F, message = F, warning = F, error = F, cache = F}
 require(knitr)
-opts_chunk$set(results='asis', message = F, warning = F, error = T, cache = F, tidy = F, rcharts="draft")
+opts_chunk$set(results='asis', message = F, warning = F, error = T, cache = F, tidy = F)
 data <- new.env()
 #reduce calls to Yahoo! Finance by saving the data
 load("pimco_data.Rdata",envir=data)

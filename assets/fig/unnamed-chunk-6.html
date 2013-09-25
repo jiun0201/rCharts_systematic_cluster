@@ -2,14 +2,12 @@
 <meta charset = 'utf-8'>
 <html>
   <head>
-    <link rel='stylesheet' href='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/css/nv.d3.css'>
-    <link rel='stylesheet' href='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/css/rNVD3.css'>
+    <link rel='stylesheet' href='http://nvd3.org/src/nv.d3.css'>
     
-    <script src='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/js/jquery-1.8.2.min.js' type='text/javascript'></script>
-    <script src='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/js/d3.v3.min.js' type='text/javascript'></script>
-    <script src='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/js/nv.d3.min-new.js' type='text/javascript'></script>
-    <script src='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/js/fisheye.js' type='text/javascript'></script>
-    <script src='C:/Program Files/R/R-3.0.1/library/rCharts/libraries/nvd3/js/d3-grid.js' type='text/javascript'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/d3.v2.min.js' type='text/javascript'></script>
+    <script src='http://nvd3.org/nv.d3.js' type='text/javascript'></script>
+    <script src='http://nvd3.org/lib/fisheye.js' type='text/javascript'></script>
     
     <style>
     .rChart {
@@ -23,24 +21,24 @@
     
   </head>
   <body>
-    <div id='chart25a875e332c3' class='rChart nvd3'></div>  
+    <div id='chart25a8a917475' class='rChart nvd3'></div>  
     
     <script type='text/javascript'>
  $(document).ready(function(){
-      drawchart25a875e332c3()
+      drawchart25a8a917475()
     });
-    function drawchart25a875e332c3(){  
+    function drawchart25a8a917475(){  
       var opts = {
- "dom": "chart25a875e332c3",
+ "dom": "chart25a8a917475",
 "width":    800,
 "height":    400,
 "x": "PC1",
 "y": "PC2",
 "group": "group",
 "type": "scatterChart",
-"id": "chart25a875e332c3" 
+"id": "chart25a8a917475" 
 },
-        data = [{"symbol":"PAAIX","group":1,"PC1":0.281311306443072,"PC2":-0.277293321795814},{"symbol":"PAUIX","group":1,"PC1":-0.011854660136006,"PC2":-0.249970589783097},{"symbol":"PCDIX","group":4,"PC1":-0.0504702330673811,"PC2":0.432608022698271},{"symbol":"PCIMX","group":4,"PC1":-0.134241547203679,"PC2":0.439535696652057},{"symbol":"PCRIX","group":1,"PC1":0.288272465405862,"PC2":-0.158959459709764},{"symbol":"PDIIX","group":5,"PC1":-0.0409985755972403,"PC2":-0.0420685537717665},{"symbol":"PDMIX","group":2,"PC1":-0.404316903021386,"PC2":-0.150619925765507},{"symbol":"PEBIX","group":1,"PC1":0.0745768250228441,"PC2":-0.0206755265363153},{"symbol":"PEDIX","group":2,"PC1":-0.606448738987475,"PC2":-0.163454956577218},{"symbol":"PELBX","group":6,"PC1":0.512603492096295,"PC2":-0.00478483564595584},{"symbol":"PFCIX","group":6,"PC1":0.741237267076282,"PC2":-0.0280539990707481},{"symbol":"PFIIX","group":6,"PC1":0.651987859064044,"PC2":0.388249056673063},{"symbol":"PFMIX","group":4,"PC1":-0.124623387144558,"PC2":0.470112196440705},{"symbol":"PFORX","group":5,"PC1":-0.355944162667542,"PC2":0.184197039988809},{"symbol":"PFUIX","group":5,"PC1":-0.143661469794012,"PC2":-0.0597869884822948},{"symbol":"PGBIX","group":2,"PC1":-0.460396321100287,"PC2":0.0757928821967098},{"symbol":"PGOVX","group":2,"PC1":-0.627494206670486,"PC2":-0.147997856483504},{"symbol":"PHIYX","group":1,"PC1":0.198592248237404,"PC2":0.0162497789961273},{"symbol":"PHMIX","group":4,"PC1":-0.0772367209537328,"PC2":0.463451824794662},{"symbol":"PIGIX","group":2,"PC1":-0.401065753528486,"PC2":-0.100860271037697},{"symbol":"PIGLX","group":5,"PC1":-0.259507441153545,"PC2":-0.0893373132369743},{"symbol":"PIMIX","group":5,"PC1":-0.251375995940915,"PC2":-0.106103697066278},{"symbol":"PISIX","group":6,"PC1":0.721841966063409,"PC2":-0.0564990785626576},{"symbol":"PLDIX","group":5,"PC1":-0.181825937357533,"PC2":-0.091940999479415},{"symbol":"PLDTX","group":5,"PC1":-0.309262894358215,"PC2":-0.11633097211297},{"symbol":"PLMIX","group":6,"PC1":0.531995499526169,"PC2":-0.0409319720103527},{"symbol":"PLRIX","group":2,"PC1":-0.559991953663475,"PC2":-0.152235389487661},{"symbol":"PMBIX","group":2,"PC1":-0.407441280803507,"PC2":-0.136041295578992},{"symbol":"PMDRX","group":5,"PC1":-0.291925530028851,"PC2":-0.135260059713812},{"symbol":"PNYIX","group":4,"PC1":-0.22571713213874,"PC2":0.392160934656423},{"symbol":"PRAIX","group":2,"PC1":-0.421105278699713,"PC2":-0.221512002110594},{"symbol":"PRRIX","group":2,"PC1":-0.409524308582857,"PC2":-0.17962585256082},{"symbol":"PRRSX","group":6,"PC1":0.520740939705998,"PC2":-0.176192643147136},{"symbol":"PSCSX","group":6,"PC1":0.696322880956994,"PC2":-0.0959726237089369},{"symbol":"PSDIX","group":4,"PC1":0.276207874218323,"PC2":0.653566236420666},{"symbol":"PSKIX","group":6,"PC1":0.650960221424405,"PC2":-0.132649491363311},{"symbol":"PSPTX","group":6,"PC1":0.683291942395263,"PC2":-0.116177134362899},{"symbol":"PSTIX","group":3,"PC1":-1.08914243436574,"PC2":0.324555250844365},{"symbol":"PSTKX","group":6,"PC1":0.81235830229015,"PC2":-0.0272118988800384},{"symbol":"PTLDX","group":5,"PC1":-0.179999018420024,"PC2":-0.108089434406873},{"symbol":"PTRIX","group":2,"PC1":-0.377766080701555,"PC2":-0.161458862294143},{"symbol":"PTSAX","group":5,"PC1":-0.314188868439817,"PC2":-0.119188156677555},{"symbol":"PTSHX","group":5,"PC1":-0.109152510711049,"PC2":0.0638780034042566},{"symbol":"PTTRX","group":2,"PC1":-0.359451509562752,"PC2":-0.128888168692297},{"symbol":"PXTIX","group":6,"PC1":0.696686211060022,"PC2":-0.11041188847887},{"symbol":"VFINX","group":6,"PC1":0.847143553814023,"PC2":0.00222829482615091}]
+        data = [{"symbol":"PAAIX","group":6,"PC1":0.281311306443072,"PC2":-0.277293321795814},{"symbol":"PAUIX","group":6,"PC1":-0.011854660136006,"PC2":-0.249970589783097},{"symbol":"PCDIX","group":1,"PC1":-0.0504702330673811,"PC2":0.432608022698271},{"symbol":"PCIMX","group":1,"PC1":-0.134241547203679,"PC2":0.439535696652057},{"symbol":"PCRIX","group":6,"PC1":0.288272465405862,"PC2":-0.158959459709764},{"symbol":"PDIIX","group":3,"PC1":-0.0409985755972403,"PC2":-0.0420685537717665},{"symbol":"PDMIX","group":4,"PC1":-0.404316903021386,"PC2":-0.150619925765507},{"symbol":"PEBIX","group":6,"PC1":0.0745768250228441,"PC2":-0.0206755265363153},{"symbol":"PEDIX","group":4,"PC1":-0.606448738987475,"PC2":-0.163454956577218},{"symbol":"PELBX","group":5,"PC1":0.512603492096295,"PC2":-0.00478483564595584},{"symbol":"PFCIX","group":5,"PC1":0.741237267076282,"PC2":-0.0280539990707481},{"symbol":"PFIIX","group":5,"PC1":0.651987859064044,"PC2":0.388249056673063},{"symbol":"PFMIX","group":1,"PC1":-0.124623387144558,"PC2":0.470112196440705},{"symbol":"PFORX","group":3,"PC1":-0.355944162667542,"PC2":0.184197039988809},{"symbol":"PFUIX","group":3,"PC1":-0.143661469794012,"PC2":-0.0597869884822948},{"symbol":"PGBIX","group":4,"PC1":-0.460396321100287,"PC2":0.0757928821967098},{"symbol":"PGOVX","group":4,"PC1":-0.627494206670486,"PC2":-0.147997856483504},{"symbol":"PHIYX","group":6,"PC1":0.198592248237404,"PC2":0.0162497789961273},{"symbol":"PHMIX","group":1,"PC1":-0.0772367209537328,"PC2":0.463451824794662},{"symbol":"PIGIX","group":4,"PC1":-0.401065753528486,"PC2":-0.100860271037697},{"symbol":"PIGLX","group":3,"PC1":-0.259507441153545,"PC2":-0.0893373132369743},{"symbol":"PIMIX","group":3,"PC1":-0.251375995940915,"PC2":-0.106103697066278},{"symbol":"PISIX","group":5,"PC1":0.721841966063409,"PC2":-0.0564990785626576},{"symbol":"PLDIX","group":3,"PC1":-0.181825937357533,"PC2":-0.091940999479415},{"symbol":"PLDTX","group":3,"PC1":-0.309262894358215,"PC2":-0.11633097211297},{"symbol":"PLMIX","group":5,"PC1":0.531995499526169,"PC2":-0.0409319720103527},{"symbol":"PLRIX","group":4,"PC1":-0.559991953663475,"PC2":-0.152235389487661},{"symbol":"PMBIX","group":4,"PC1":-0.407441280803507,"PC2":-0.136041295578992},{"symbol":"PMDRX","group":3,"PC1":-0.291925530028851,"PC2":-0.135260059713812},{"symbol":"PNYIX","group":1,"PC1":-0.22571713213874,"PC2":0.392160934656423},{"symbol":"PRAIX","group":4,"PC1":-0.421105278699713,"PC2":-0.221512002110594},{"symbol":"PRRIX","group":4,"PC1":-0.409524308582857,"PC2":-0.17962585256082},{"symbol":"PRRSX","group":5,"PC1":0.520740939705998,"PC2":-0.176192643147136},{"symbol":"PSCSX","group":5,"PC1":0.696322880956994,"PC2":-0.0959726237089369},{"symbol":"PSDIX","group":1,"PC1":0.276207874218323,"PC2":0.653566236420666},{"symbol":"PSKIX","group":5,"PC1":0.650960221424405,"PC2":-0.132649491363311},{"symbol":"PSPTX","group":5,"PC1":0.683291942395263,"PC2":-0.116177134362899},{"symbol":"PSTIX","group":2,"PC1":-1.08914243436574,"PC2":0.324555250844365},{"symbol":"PSTKX","group":5,"PC1":0.81235830229015,"PC2":-0.0272118988800384},{"symbol":"PTLDX","group":3,"PC1":-0.179999018420024,"PC2":-0.108089434406873},{"symbol":"PTRIX","group":4,"PC1":-0.377766080701555,"PC2":-0.161458862294143},{"symbol":"PTSAX","group":3,"PC1":-0.314188868439817,"PC2":-0.119188156677555},{"symbol":"PTSHX","group":3,"PC1":-0.109152510711049,"PC2":0.0638780034042566},{"symbol":"PTTRX","group":4,"PC1":-0.359451509562752,"PC2":-0.128888168692297},{"symbol":"PXTIX","group":5,"PC1":0.696686211060022,"PC2":-0.11041188847887},{"symbol":"VFINX","group":5,"PC1":0.847143553814023,"PC2":0.00222829482615091}]
   
       if(!(opts.type==="pieChart" || opts.type==="sparklinePlus")) {
         var data = d3.nest()
