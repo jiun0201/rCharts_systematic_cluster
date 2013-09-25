@@ -1,5 +1,5 @@
-#work with http://systematicinvestor.wordpress.com/2013/02/12/cluster-portfolio-allocation/
-#visualize with d3 using rCharts
+# work with http://systematicinvestor.wordpress.com/category/cluster/
+# visualize with d3 using rCharts
 
 ###############################################################################
 # Load Systematic Investor Toolbox (SIT)
@@ -45,6 +45,7 @@ distance = as.dist(dissimilarity)
 # get principal coordinates
 xy = cmdscale(distance)
 fit = kmeans(xy, ngroups, iter.max=100, nstart=100)
+# do a noninteractive plot of the coordinates
 clusplot(xy, fit$cluster, color=TRUE, shade=TRUE, labels=3, lines=0, plotchar=F, 
          main = paste('Major Market Clusters over 6 Clusters'), sub='')
 abline(v=0)
@@ -53,6 +54,8 @@ abline(h=0)
 # now use rCharts to get some interactive d3 plots
 pc.df <- data.frame(rownames(xy),grp,-xy)
 colnames(pc.df) <- c("symbol","group","PC1","PC2")
+
+# first a dimplejs version
 dP <- dPlot(
   PC2 ~ PC1,
   groups = c("symbol","group"),
@@ -62,6 +65,7 @@ dP <- dPlot(
 dP$xAxis( type = "addMeasureAxis" )
 dP
 
+# then a nvd3 version
 nP <- nPlot(
   PC2 ~ PC1,
   group = "group",
@@ -76,4 +80,3 @@ nP$chart(
     return '<h3>Group: ' + key + '<br>' + graph.point.symbol + '</h3>';
   }!#")
 nP
-
