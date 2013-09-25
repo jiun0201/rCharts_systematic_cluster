@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>rCharts | Systematic Investor Clusters and Principal Coordinates</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="favicon.ico">
+  <style>
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  </style>
+  
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+<link  rel="stylesheet" 
+    href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+  <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/bootstrap-responsive.min.css">
+  
+  <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/main.css">
+  <link rel="stylesheet" href="libraries/highlighters/prettify/css/twitter-bootstrap.css" />
+  <script src="libraries/frameworks/bootstrap/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/frameworks/bootstrap/js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+    <link rel=stylesheet href="http://fonts.googleapis.com/css?family=Raleway:300"></link>
+<link rel=stylesheet href="http://fonts.googleapis.com/css?family=Oxygen"></link>
+
+  
+</head>
+<body>
+   <!--[if lt IE 7]>
+     <p class="chromeframe">You are using an outdated browser. 
+       <a href="http://browsehappy.com/">Upgrade your browser today</a> or 
+       <a href="http://www.google.com/chromeframe/?redirect=true"> 
+         install Google Chrome Frame
+       </a> to better experience this site.
+    </p>
+   <![endif]-->
+   <!-- Ref: http://twitter.github.com/bootstrap/examples/hero.html -->
+   
+    <div class="container">
+      
+<style>
+iframe{
+  height:600px;
+  width:900px;
+  margin:auto auto;
+}
+
+body{
+  font-family: 'Oxygen', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h1,h2,h3,h4 {
+  font-family: 'Raleway', sans-serif;
+}
+
+.container { width: 900px; }
+
+h3 {
+  background-color: #D4DAEC;
+    text-indent: 100px; 
+}
+
+h4 {
+  text-indent: 100px;
+}
+</style>
+  
+
+<p><a href="https://github.com/timelyportfolio/rCharts_systematic_cluster"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a></p>
+
+<h1>Static and Interactive Plots of Principal Coordinates on Systematic Investor Clusters</h1>
+
+<p>I have already written it, but I feel the need to once again compliment <a href="http://systematicinvestor.wordpress.com">Systematic Investor</a> for the very fine R financial work that he shares.  The only thing that I can think of to improve what he has done is by using <a href="http://rcharts.io">rCharts</a> and <a href="http://d3js.org">d3.js</a> to add interactivity to his plots.  In this quick example, we&#39;ll cluster some Pimco mutual fund price data and plot the Principal Coordinates with the orignal static graph and then use a couple lines of rCharts to demonstrate a <a href="http://dimplejs.org">dimple.js</a> and a <a href="http://nvd3.org">nvd3</a> version of the scatterplot.</p>
+
+<h3>Gather Data as Usual</h3>
+
+<pre><code class="r"># work with http://systematicinvestor.wordpress.com/category/cluster/
+# visualize with d3 using rCharts
+
+###############################################################################
+# Load Systematic Investor Toolbox (SIT)
+# http://systematicinvestor.wordpress.com/systematic-investor-toolbox/
+###############################################################################
+setInternet2(TRUE)
+con = gzcon(url(&#39;http://www.systematicportfolio.com/sit.gz&#39;, &#39;rb&#39;))
+source(con)
+close(con)
+#*****************************************************************
+# Load historical data for Pimco Funds
+#****************************************************************** 
+library(quantmod)
+tickers = c(&quot;PISIX&quot;,&quot;PSKIX&quot;,&quot;PSDIX&quot;,&quot;PSTKX&quot;,&quot;PCRIX&quot;,
+            &quot;PFIIX&quot;,&quot;PHMIX&quot;,&quot;PFCIX&quot;,&quot;PCDIX&quot;,&quot;PTSHX&quot;,
+            &quot;PFMIX&quot;,&quot;PLMIX&quot;,&quot;PSPTX&quot;,&quot;PCIMX&quot;,&quot;PSTIX&quot;,
+            &quot;PNYIX&quot;,&quot;PLDTX&quot;,&quot;PLDIX&quot;,&quot;PTLDX&quot;,&quot;PAAIX&quot;,
+            &quot;PXTIX&quot;,&quot;PHIYX&quot;,&quot;PSCSX&quot;,&quot;PAUIX&quot;,&quot;PTRIX&quot;,
+            &quot;PGBIX&quot;,&quot;PFORX&quot;,&quot;PELBX&quot;,&quot;PDMIX&quot;,&quot;PMDRX&quot;,
+            &quot;PEBIX&quot;,&quot;PDIIX&quot;,&quot;PRRSX&quot;,&quot;PMBIX&quot;,&quot;PTSAX&quot;,
+            &quot;PTTRX&quot;,&quot;PIGLX&quot;,&quot;PRRIX&quot;,&quot;PFUIX&quot;,&quot;PIMIX&quot;,
+            &quot;PIGIX&quot;,&quot;PRAIX&quot;,&quot;PLRIX&quot;,&quot;PGOVX&quot;,&quot;PEDIX&quot;,&quot;VFINX&quot;)
+
+data &lt;- new.env()
+getSymbols(tickers, src = &#39;yahoo&#39;, from = &#39;1900-01-01&#39;, env = data, auto.assign = T)
+for(i in ls(data)) data[[i]] = adjustOHLC(data[[i]], use.Adjusted=T)
+#save(file=&quot;pimco_data.Rdata&quot;,list=ls(envir=data),envir=data)
+</code></pre>
+
+<h3>Copy/Paste Systematic Investor Calculations</h3>
+
+<p>I can&#39;t really add anything novel here, so I will basically copy and paste from some of Systematic Investor&#39;s posts and functions.  If I incorrectly changed Principal Components to Principal Coordinates, please let me know, but the way I understand it <code>cmdscale</code> returns Principal Coordinates.  Here is some <a href="http://stats.stackexchange.com/questions/14002/whats-the-difference-between-principal-components-analysis-and-multidimensional">additional discussion from Cross Validated</a>.</p>
+
+<pre><code class="r">bt.prep(data, align=&#39;remove.na&#39;)
+
+# get the one period returns
+ret &lt;- data$prices / mlag(data$prices) - 1
+# make first returns 0 instead of NA
+ret[1,] &lt;- 0
+
+# create input assumptions
+ia = create.historical.ia(ret, 252) 
+
+# create clusters
+grp = cluster.group.kmeans.90(ia)
+ngroups = max(grp)
+
+# since cluster.group.kmeans.90 only returns the group
+# get the components out manually with these bits of code
+correlation = cor(ret, use=&#39;complete.obs&#39;, method = &quot;spearman&quot;)    
+dissimilarity = 1 - (correlation)
+distance = as.dist(dissimilarity)
+
+# get principal coordinates
+xy = cmdscale(distance)
+fit = kmeans(xy, ngroups, iter.max=100, nstart=100)
+</code></pre>
+
+<h3>Pretty Pictures</h3>
+
+<p>This, of course, is my favorite part.  Drawing pictures adds a whole new level of understanding to data.  We&#39;ll first plot the original static graphic using <code>clusplot</code>.  There is certainly nothing wrong with this fine plot, but interactivity usually helps me understand and also gives me somthing to play with.</p>
+
+<pre><code class="r">require(cluster)
+# do a noninteractive plot of the coordinates
+clusplot(xy, fit$cluster, color=TRUE, shade=TRUE, labels=3, lines=0, plotchar=F, 
+         main = paste(&#39;Major Market Clusters over 6 Clusters&#39;), sub=&#39;&#39;)
+abline(v=0)
+abline(h=0)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+<p><a href="http://dimplejs.org">dimple.js</a> is generally the first rCharts library that I use when I first start drawing plots, since it is extremely flexible.  It does suffer just slightly though with a lack of pre-built interactive controls.</p>
+
+<pre><code class="r"># now use rCharts to get some interactive d3 plots
+pc.df &lt;- data.frame(rownames(xy),grp,-xy)
+colnames(pc.df) &lt;- c(&quot;symbol&quot;,&quot;group&quot;,&quot;PC1&quot;,&quot;PC2&quot;)
+
+# first a dimplejs version
+dP &lt;- dPlot(
+  PC2 ~ PC1,
+  groups = c(&quot;symbol&quot;,&quot;group&quot;),
+  data = pc.df,
+  type = &quot;bubble&quot;
+)
+dP$xAxis( type = &quot;addMeasureAxis&quot; )
+dP
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-5.html seamless></iframe>
+
+<p><a href="http://nvd3.org">nvd3</a> is a little slicker with its interactivity and styling.  Unfortunately though it suffers from a little issue with its tooltips on scatterplots.  The tooltips don&#39;t work until the magnify control is toggled on and then off.</p>
+
+<pre><code class="r"># then a nvd3 version
+nP &lt;- nPlot(
+  PC2 ~ PC1,
+  group = &quot;group&quot;,
+  data = pc.df,
+  type = &quot;scatterChart&quot;)
+nP$xAxis(tickFormat = &quot;#!d3.format(&#39;.2%&#39;)!#&quot;)
+nP$yAxis(tickFormat = &quot;#!d3.format(&#39;.2%&#39;)!#&quot;)
+nP$chart(
+  showDistX = TRUE,
+  showDistY = TRUE,
+  tooltipContent = &quot;#!function(key, y, e, graph) {
+    return &#39;&lt;h3&gt;Group: &#39; + key + &#39;&lt;br&gt;&#39; +
+      graph.point.symbol + &#39;&lt;/a&gt;&lt;/h3&gt;&#39;;
+  }!#&quot;)
+nP
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-6.html seamless></iframe>
+
+<h3>Thanks</h3>
+
+<p>Thanks <a href="http://systematicinvestor.wordpress.com">Systematic Investor</a>, <a href="http://github.com/ramnathv">Ramnath Vaidyanathan</a>, <a href="http://bost.ocks.org/mike/">Mike Bostock</a>, and all the other fine people who have so generously shared their Javascript and R code.</p>
+
+    </div>
+        
+</body>
+  <script src="libraries/frameworks/bootstrap/js/vendor/bootstrap.min.js"></script>
+  <script src="libraries/frameworks/bootstrap/js/plugins.js"></script>
+  <script src="libraries/frameworks/bootstrap/js/main.js"></script>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- Google Prettify -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+  <script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+  <script>
+    var pres = document.getElementsByTagName("pre");
+    for (var i=0; i < pres.length; ++i) {
+      pres[i].className = "prettyprint linenums";
+    }
+    prettyPrint();
+  </script>
+  <!-- End Google Prettify --> 
+  </html>

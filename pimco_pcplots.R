@@ -13,7 +13,15 @@ close(con)
 # Load historical data for Pimco Funds
 #****************************************************************** 
 library(quantmod)
-tickers = c("PISIX","PSKIX","PSDIX","PSTKX","PCRIX","PFIIX","PHMIX","PFCIX","PCDIX","PTSHX","PFMIX","PLMIX","PSPTX","PCIMX","PSTIX","PNYIX","PLDTX","PLDIX","PTLDX","PAAIX","PXTIX","PHIYX","PSCSX","PAUIX","PTRIX","PGBIX","PFORX","PELBX","PDMIX","PMDRX","PEBIX","PDIIX","PRRSX","PMBIX","PTSAX","PTTRX","PIGLX","PRRIX","PFUIX","PIMIX","PIGIX","PRAIX","PLRIX","PGOVX","PEDIX","VFINX")
+tickers = c("PISIX","PSKIX","PSDIX","PSTKX","PCRIX",
+            "PFIIX","PHMIX","PFCIX","PCDIX","PTSHX",
+            "PFMIX","PLMIX","PSPTX","PCIMX","PSTIX",
+            "PNYIX","PLDTX","PLDIX","PTLDX","PAAIX",
+            "PXTIX","PHIYX","PSCSX","PAUIX","PTRIX",
+            "PGBIX","PFORX","PELBX","PDMIX","PMDRX",
+            "PEBIX","PDIIX","PRRSX","PMBIX","PTSAX",
+            "PTTRX","PIGLX","PRRIX","PFUIX","PIMIX",
+            "PIGIX","PRAIX","PLRIX","PGOVX","PEDIX","VFINX")
 
 data <- new.env()
 #reduce calls to Yahoo! Finance while experimenting
@@ -23,8 +31,9 @@ load("pimco_data.Rdata",envir=data)
 #save(file="pimco_data.Rdata",list=ls(envir=data),envir=data)
 bt.prep(data, align='remove.na')
 
-
+# get the one period returns
 ret <- data$prices / mlag(data$prices) - 1
+# make first returns 0 instead of NA
 ret[1,] <- 0
 
 # create input assumptions
